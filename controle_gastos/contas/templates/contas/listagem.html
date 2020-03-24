@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="br">
+    <head>
+        <meta charset="UTF-8">
+        <!-- Meta tag Obrigatória-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <!--Linka com o nosso css-->
+        <title>Transações</title>
+    </head>
+    <body>
+        <div class="container bg-dark p-3 clearfix text-light">
+            <h2 class="float-left">Transações:</h2>
+            <a  href="{% url 'url_cadastro' %}"><!--Cria um link
+            chamando a URL de cadastro-->
+                <button type="submit" class="btn btn-primary float-right">
+                    Nova transação
+                </button>
+            </a>
+        </div>
+        <div>
+            <!--Inicia um for para cada transacao na lista trasacoes-->
+            {% for transacao in transacoes %}<!--Acessa o identificador trasacoes
+             do dicionario enviado pelo view, para accessar as transações feitas-->
+                <div class="container bg-danger p-1 text-light">
+                    <b>{{ transacao.descricao }}</b><!--Exibe a descricao do iteração atual-->
+                </div>
+                <div class="container bg-dark p-3 text-light">
+                    <b>Data:</b> {{ transacao.dt_criacao }}<!--Exibe a data-->
+                    <br><b>Valor:</b> R$ {{ transacao.valor }}<!--Exibe o valor-->
+                    <br><b>Categoria:</b> {{ transacao.categoria }}<!--Exibe a categoria-->
+                    <br><b>Observação:</b> {{ transacao.observacao }}<!--Exibe a observacao-->
+                    <br>
+                    <a  href="{% url 'url_atualizar' transacao.id %}"><!--Cria um link
+                    chamando a URL e enviando o ID da transação atual-->
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </a>
+                    <a  href="{% url 'url_deletar' transacao.id %}"><!--Cria um link
+                    chamando a URL e enviando o ID da transação atual-->
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </a>
+                </div>
+            {% endfor %}<!--Finaliza o for-->
+        </div>
+    </body>
+</html>
